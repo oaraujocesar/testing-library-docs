@@ -7,6 +7,7 @@
 
 import React from 'react'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import Translate, {translate} from '@docusaurus/Translate'
 import {GridBlock} from '../components/GridBlock'
 import {Container} from '../components/Container'
 import {Showcase} from '../components/Showcase'
@@ -30,7 +31,13 @@ const HomeSplash = props => {
 
   const Logo = props => (
     <div className="projectLogo">
-      <img src={props.img_src} alt="Project Logo" />
+      <img
+        src={props.img_src}
+        alt={translate({
+          message: 'Project Logo',
+          description: 'The alternative logo text',
+        })}
+      />
     </div>
   )
 
@@ -38,7 +45,12 @@ const HomeSplash = props => {
     <div>
       <h2 className="projectTitle">{siteConfig.title}</h2>
       <div className="projectTaglineWrapper">
-        <p className="projectTagline">{siteConfig.tagline}</p>
+        <p className="projectTagline">
+          <Translate id="projectTagline">
+            Simple and complete testing utilities that encourage good testing
+            practices
+          </Translate>
+        </p>
       </div>
     </div>
   )
@@ -59,7 +71,9 @@ const HomeSplash = props => {
       <div className="inner">
         <ProjectTitle siteConfig={siteConfig} />
         <div className="pluginWrapper buttonWrapper">
-          <Button href={'/docs/'}>Get Started</Button>
+          <Button href={'/docs/'}>
+            <Translate id="gettingStartedButton">Get Started</Translate>
+          </Button>
         </div>
       </div>
     </SplashContainer>
@@ -91,8 +105,13 @@ export default class Index extends React.Component {
         <div style={{textAlign: 'center'}}>
           <p>
             <i>
-              The more your tests resemble the way your software is used, <br />
-              the more confidence they can give you.
+              <Translate id="homepageQuote.firstPart">
+                The more your tests resemble the way your software is used,
+              </Translate>
+              <br />
+              <Translate id="homepageQuote.secondPart">
+                the more confidence they can give you.
+              </Translate>
             </i>
           </p>
         </div>
@@ -105,10 +124,16 @@ export default class Index extends React.Component {
           {[
             {
               title: '',
-              content:
-                "## The Problem \n - You want tests for your UI that avoid including implementation details and rather focus on making your tests give you the confidence for which they are intended. \n - You want your tests to be maintainable so refactors _(changes to implementation but not functionality)_ don't break your tests and slow you and your team down.",
+              content: translate({
+                message:
+                  "## The Problem \n - You want tests for your UI that avoid including implementation details and rather focus on making your tests give you the confidence for which they are intended. \n - You want your tests to be maintainable so refactors _(changes to implementation but not functionality)_ don't break your tests and slow you and your team down.",
+                id: 'theProblem',
+              }),
               image: `${baseUrl}img/interrobang-128x128.png`,
-              imageAlt: 'The problem (picture of a question mark)',
+              imageAlt: translate({
+                message: 'The problem (picture of a question mark)',
+                id: 'theProblemIcon',
+              }),
               imageAlign: 'left',
             },
           ]}
@@ -123,21 +148,36 @@ export default class Index extends React.Component {
             title: '',
             image: `${baseUrl}img/star-128x128.png`,
             imageAlign: 'right',
-            imageAlt: 'The solution (picture of a star)',
-            content:
-              '## The Solution \n The Testing Library family of libraries is a very light-weight solution for testing without all the implementation details. The main utilities it provides involve querying for nodes similarly to how users would find them. In this way, testing-library helps ensure your tests give you confidence in your UI code.',
+            imageAlt: translate({
+              message: 'The solution (picture of a star)',
+              id: 'theSolutionIcon',
+            }),
+            content: translate({
+              message:
+                '## The Solution \n The Testing Library family of libraries is a very light-weight solution for testing without all the implementation details. The main utilities it provides involve querying for nodes similarly to how users would find them. In this way, testing-library helps ensure your tests give you confidence in your UI code.',
+              id: 'theSolution',
+            }),
           },
         ]}
       </Block>,
       <Block background={'light'} align="left">
         {[
           {
-            title: 'Guiding Principle',
+            title: translate({
+              message: 'Guiding Principle',
+              id: 'guidingPrincipleTitle',
+            }),
             image: `${baseUrl}img/trophy-128x128.png`,
             imageAlign: 'left',
-            imageAlt: 'The guiding principle (picture of a brick wall)',
-            content:
-              '_The more your tests resemble the way your software is used, the more confidence they can give you._',
+            imageAlt: translate({
+              message: 'The guiding principle (picture of a brick wall)',
+              id: 'theGuidingPrincipleIcon',
+            }),
+            content: translate({
+              message:
+                '_The more your tests resemble the way your software is used, the more confidence they can give you._',
+              id: 'theGuidingPrinciple',
+            }),
           },
         ]}
       </Block>,
@@ -147,24 +187,42 @@ export default class Index extends React.Component {
       <Block layout="twoColumn">
         {[
           {
-            content:
-              'Tests only break when your app breaks, not implementation details',
+            content: translate({
+              message:
+                'Tests only break when your app breaks, not implementation details',
+              id: 'featureMaintainable',
+            }),
             image: `${baseUrl}img/wrench-128x128.png`,
             imageAlign: 'top',
-            title: 'Write Maintainable Tests',
+            title: translate({
+              message: 'Write Maintainable Tests',
+              id: 'featureMaintainableTitle',
+            }),
           },
           {
-            content: 'Interact with your app the same way as your users',
+            content: translate({
+              message: 'Interact with your app the same way as your users',
+              id: 'featureConfidence',
+            }),
             image: `${baseUrl}img/check-128x128.png`,
             imageAlign: 'top',
-            title: 'Develop with Confidence',
+            title: translate({
+              message: 'Develop with Confidence',
+              id: 'featureConfidenceTitle',
+            }),
           },
           {
-            content:
-              'Built-in selectors find elements the way users do to help you write inclusive code',
+            content: translate({
+              message:
+                'Built-in selectors find elements the way users do to help you write inclusive code',
+              id: 'featureAccessible',
+            }),
             image: `${baseUrl}img/tada-128x128.png`,
             imageAlign: 'top',
-            title: 'Accessible by Default',
+            title: translate({
+              message: 'Accessible by Default',
+              id: 'featureAccessibleTitle',
+            }),
           },
         ]}
       </Block>
@@ -231,7 +289,10 @@ export default class Index extends React.Component {
           {
             image: `${baseUrl}img/construction-128x128.png`,
             imageAlign: 'top',
-            title: '[And more...](./docs/ecosystem-user-event)',
+            title: translate({
+              message: '[And more...](./docs/ecosystem-user-event)',
+              id: 'andMoreItem',
+            }),
           },
         ]}
       </Block>
@@ -246,7 +307,9 @@ export default class Index extends React.Component {
 
       return (
         <div className="productShowcaseSection paddingBottom paddingTop">
-          <h2>Who is Using This?</h2>
+          <h2>
+            <Translate id="whoIsUsingThisTitle">Who is Using This?</Translate>
+          </h2>
           <div className="logos">
             <Showcase
               users={siteConfig.customFields.users.filter(u => u.pinned)}
@@ -256,7 +319,9 @@ export default class Index extends React.Component {
             className="button button--primary button--outline"
             href={pageUrl('users')}
           >
-            More {siteConfig.title} Users
+            <Translate id="whoIsUsingThisButton">
+              More Testing Library Users
+            </Translate>
           </a>
         </div>
       )
@@ -265,22 +330,30 @@ export default class Index extends React.Component {
     const Awards = () => {
       return (
         <div className="awardsSection paddingBottom paddingTop">
-          <h2>Awards</h2>
+          <h2>
+            <Translate id="awardsTitle">Awards</Translate>
+          </h2>
           <Block layout="threeColumn" background={null}>
             {[
               {
                 image: `${baseUrl}img/impactful-conribution-award-399x544.png`,
                 imageAlign: 'top',
                 imageLink: 'https://osawards.com/react/2019',
-                imageAlt:
-                  'Winner of the Open Source Awards 2019 in the category "The most impactful contribution to the community"',
+                imageAlt: translate({
+                  message:
+                    'Winner of the Open Source Awards 2019 in the category "The most impactful contribution to the community"',
+                  id: 'awardImpactful',
+                }),
               },
               {
                 image: `${baseUrl}img/highest-satisfaction-638x574.png`,
                 imageAlign: 'top',
                 imageLink: 'https://2020.stateofjs.com/en-US/awards/',
-                imageAlt:
-                  'Winner of the State of JS 2020 award for the technology with the highest percentage of satisfied users',
+                imageAlt: translate({
+                  message:
+                    'Winner of the State of JS 2020 award for the technology with the highest percentage of satisfied users',
+                  id: 'awardStateOfJs',
+                }),
               },
             ]}
           </Block>
