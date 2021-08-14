@@ -23,18 +23,9 @@
   },
   "lint-staged": {
     "linters": {
-      "*.js": [
-        "prettier --write",
-        "git add"
-      ],
-      "*.mdx": [
-        "prettier --write --parser=mdx",
-        "git add"
-      ],
-      "*.json": [
-        "prettier --write --parser=json",
-        "git add"
-      ]
+      "*.js": ["prettier --write", "git add"],
+      "*.mdx": ["prettier --write --parser=mdx", "git add"],
+      "*.json": ["prettier --write --parser=json", "git add"]
     }
   },
   "husky": {
@@ -43,8 +34,8 @@
     }
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.66",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.66",
+    "@docusaurus/core": "^2.0.0-beta.4",
+    "@docusaurus/preset-classic": "^2.0.0-beta.4",
     "classnames": "^2.3.1",
     "clsx": "^1.1.1",
     "react": "^16.10.2",
