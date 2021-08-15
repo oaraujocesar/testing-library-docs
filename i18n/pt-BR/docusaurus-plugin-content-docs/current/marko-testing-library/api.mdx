@@ -1,0 +1,302 @@
+---
+id: api
+title: API
+---
+
+`Marko Testing Library` re-exports everything from `DOM Testing Library` as well
+as these methods:
+
+- [`render`](#render)
+  - [`render` Options](#render-options)
+    - [`container`](#container)
+- [`render` Result](#render-result)
+  - [`...queries`](#queries)
+  - [`debug`](#debug)
+  - [`rerender`](#rerender)
+  - [`emitted`](#emitted)
+  - [`cleanup`](#cleanup)
+  - [`container`](#container-1)
+- [`cleanup`](#cleanup-1)
+
+---
+
+## `render`
+
+```javascript
+function render(
+  template, // A Marko template to render
+  input, // Input for the above template
+  options // You won't often use this, expand below for docs on options
+)
+```
+
+Render into a container which is appended to `document.body`.
+
+```javascript
+import {render} from '@marko/testing-library'
+import MyTemplate from './my-template.marko'
+
+render(MyTemplate)
+```
+
+```javascript
+import {render, screen} from '@marko/testing-library'
+import Greeting from './greeting.marko'
+
+test('renders a message', async () => {
+  const {container} = await render(Greeting, {name: 'Marko'})
+  expect(screen.getByText(/Marko/)).toBeInTheDocument()
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    <h1>Hello, Marko!</h1>
+  `)
+})
+```
+
+### `render` Options
+
+You won't often need to specify options, but if you ever do, here are the
+available options which you can provide as the third argument to `render`.
+
+#### `container`
+
+By default for client-side tests, `Marko Testing Library` will create a `div`
+and append that `div` to the `document.body` and this is where your component
+will be rendered. If you provide your own HTMLElement `container` via this
+option, it will not be appended to the `document.body` automatically.
+
+For example: If you are unit testing a `tablebody` element, it cannot be a child
+of a `div`. In this case, you can specify a `table` as the render `container`.
+
+```javascript
+const table = document.createElement('table')
+
+const {container} = await render(MyTableBody, null, {
+  container: document.body.appendChild(table),
+})
+```
+
+## `render` Result
+
+The `render` method returns a promise which resolves with an object that has a
+few properties:
+
+### `...queries`
+
+The most important feature of `render` is that the queries from
+[DOM Testing Library](queries/about.mdx) are automatically returned with their
+first argument bound to the results of rendering your component.
+
+See [Queries](queries/about.mdx) for a complete list.
+
+**Example**
+
+```javascript
+const {getByLabelText, queryAllByTestId} = await render(MyTemplate)
+```
+
+Alternatively, you can use the
+[top-level `screen` method](queries/about.mdx#screen) to query into all
+currently rendered components in the `document.body`, eg:
+
+```javascript
+import { render, screen } from "@marko/testing-library"
+
+await render(MyTemplate)
+const el = screen.getByText(...)
+```
+
+### `debug`
+
+This method is a shortcut for logging the `prettyDOM` for all children inside of
+the `container`.
+
+```javascript
+import {render} from '@marko/testing-library'
+import Greeting from './greeting.marko'
+
+const {debug} = await render(Greeting, {name: 'World'})
+debug()
+
+// <h1>Hello World</h1>
+// you can also pass an element: debug(getByTestId('messages'))
+```
+
+This is a simple wrapper around `prettyDOM` which is also exposed and comes from
+[`DOM Testing Library`](dom-testing-library/api-debugging.mdx#prettydom).
+
+### `rerender`
+
+A Marko components `input` can change at any time from a parent component.
+Although often this input is passed through your component declaratively,
+sometimes it is necessary to ensure that your components react appropriately to
+new data. You can simulate your component receiving new `input` by passing new
+data to the `rerender` helper.
+
+```javascript
+import {render} from '@marko/testing-library'
+import Greeting from './greeting.marko'
+
+const {rerender, debug} = await render(Greeting, {name: 'World'})
+
+// re-render the same component with different props
+await rerender({name: 'Marko'})
+
+debug()
+// <h1>Hello Marko</h1>
+```
+
+### `emitted`
+
+Marko components also communicate with their parents through events. It is
+recommended to also test that your components emit the right events at the right
+time.
+
+The `emitted` helper does just that. Calling the helper will return all emitted
+events since the last call to the helper. You can also pass in an event type to
+filter the results.
+
+```javascript
+import {render, fireEvent} from '@marko/testing-library'
+import Counter from './counter.marko'
+
+const {getByText, emitted} = await render(Counter)
+
+const button = getByText('Increment')
+
+await fireEvent.click(button)
+await fireEvent.click(button)
+
+// Assuming the `Counter` component forwards these button clicks as `increment` events
+expect(emitted('increment')).toHaveProperty('length', 2)
+
+await fireEvent.click(button)
+
+// Note: the tracked events are cleared every time you read them.
+// Below we are snapshoting the events after our last assertion,
+// the return value will include an array with all of the arguments for each increment event.
+expect(emitted('increment')).toMatchInlineSnapshot(`
+    Array [
+      Array [
+        Object {
+          "count": 3,
+        },
+      ],
+    ]
+`)
+
+// Without an event type will give you all events with their type and arguments.
+expect(emitted()).toMatchInlineSnapshot(`
+    Array [
+      Object {
+        "args": Array [
+          Object {
+            "count": 0,
+          },
+        ],
+        "type": "increment",
+      },
+      Object {
+        "args": Array [
+          Object {
+            "count": 1,
+          },
+        ],
+        "type": "increment",
+      },
+      Object {
+        "args": Array [
+          Object {
+            "count": 3,
+          },
+        ],
+        "type": "increment",
+      }
+    ]
+  `)
+```
+
+### `cleanup`
+
+Like the [top-level cleanup method](#cleanup-1), this allows you to remove and
+destroy the currently rendered component before the test has been completed.
+
+This can be useful to validate that a component properly cleans up any DOM
+mutations once it has been destroyed.
+
+```javascript
+import {render, screen, getRoles} from '@marko/testing-library'
+import Main from './main.marko'
+import Dialog from './dialog.marko'
+
+await render(Main)
+
+const main = screen.getByRole('main')
+expect(main).not.toHaveAttribute('aria-hidden')
+
+const {cleanup} = await render(Dialog)
+expect(main).toHaveAttribute('aria-hidden') // assert added attribute
+
+cleanup() // destroy the dialog
+
+expect(main).not.toHaveAttribute('aria-hidden') // assert attribute removed
+```
+
+### `container`
+
+The containing DOM node of your rendered Marko Component. For server-side tests
+this is a [JSDOM.fragment](https://github.com/jsdom/jsdom#fragment), and for
+client-side tests this will be whatever is passed as the `container` render
+option.
+
+> Tip: To get the root element of your rendered element, use
+> `container.firstChild`.
+
+> 🚨 If you find yourself using `container` to query for rendered elements then
+> you should reconsider! The other queries are designed to be more resilient to
+> changes that will be made to the component you're testing. Avoid using
+> `container` to query for elements!
+
+## `fireEvent`
+
+Because Marko batches DOM updates to avoid unnecessary re-renders, the
+[fireEvent](dom-testing-library/api-events.mdx) helpers are re-exported as
+`async` functions. Awaiting this ensures that the DOM has properly updated in
+response to the event triggered in the test.
+
+```js
+await fireEvent.click(getByText('Click me'))
+```
+
+## `cleanup`
+
+With client-side tests your components are rendered into a placeholder
+HTMLElement. To ensure that your components are properly removed, and destroyed,
+after each test the `cleanup` method is called for you automatically by hooking
+into `afterEach` in supported test frameworks. You can also manually call
+`cleanup` at any time which will remove all attached components.
+
+```javascript
+import {render, cleanup, screen} from '@marko/testing-library'
+import Greeting from './greeting.marko'
+
+await render(Greeting, {name: 'Marko'})
+
+expect(screen.getByText(/Marko/)).toBeInTheDocument()
+
+// manually cleanup the component before the test is finished
+cleanup()
+expect(screen.queryByText(/Marko/)).toBeNull()
+```
+
+You can turn off the automatic test cleanup by importing the following module:
+
+```javascript
+import '@marko/testing-library/dont-cleanup-after-each'
+```
+
+With mocha you can use `mocha -r @marko/testing-library/dont-cleanup-after-each`
+as a shorthand.
+
+If you are using Jest, you can include
+`setupFilesAfterEnv: ["@marko/testing-library/dont-cleanup-after-each"]` in your
+Jest config to avoid doing this in each file.
