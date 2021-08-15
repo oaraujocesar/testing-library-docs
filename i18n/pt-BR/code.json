@@ -203,7 +203,7 @@
     "message": "Um simples e completo utilitário de testes que encorajam boas práticas de testes"
   },
   "gettingStartedButton": {
-    "message": "Comece já"
+    "message": "Primeiros passos"
   },
   "homepageQuote.firstPart": {
     "message": "Quanto mais seus testes parecerem com a forma que seu software é usado,"
@@ -267,5 +267,62 @@
   },
   "andMoreItem": {
     "message": "[Entre outros...](./docs/ecosystem-user-event)"
+  },
+  "helpStackOverFlow": {
+    "message": "Pergunte no [Stack Overflow](https://stackoverflow.com/questions/tagged/react-testing-library)"
+  },
+  "helpSpectrum": {
+    "message": "Discuta problemas com a comunidade de membros no [Spectrum](https://spectrum.chat/testing-library)"
+  },
+  "helpDiscord": {
+    "message": "Converse no [Discord](https://discord.gg/testing-library)"
+  },
+  "helpResources": {
+    "message": "Navegue [Learning Material](/docs/learning)"
+  },
+  "helpResourcesTitle": {
+    "message": "Recursos"
+  },
+  "helpBlog": {
+    "message": "Mantenha-se atualizado seguindo o [blog](/blog)"
+  },
+  "helpGitHub": {
+    "message": "Obtenha suporte no [GitHub](https://github.com/testing-library/dom-testing-library)"
+  },
+  "helpTitle": {
+    "message": "Precisa de ajuda?"
+  },
+  "helpBuyACourse": {
+    "message": "Compre um curso"
+  },
+  "helpCourseContentFirst": {
+    "message": "Aprenda a testar código JavaScript com"
+  },
+  "helpCourseContentSecond": {
+    "message": "o criador da Testing Library, em"
+  },
+  "helpCourseAltText": {
+    "message": "TestingJavaScript.com Aprenda a forma inteligente e eficiente de testar qualquer aplicação JavaScript."
+  },
+  "helpContribution": {
+    "message": "Quer contribuir?"
+  },
+  "helpContributionFirstParagraph": {
+    "message": "Obrigado! Os contribuidores da Testing Library ficarão felizes em manter esta biblioteca com você. Nós não estamos buscando por financiamento, mas precisamos que todos contribuam para fazer desse projeto e comunidade um projeto de sucesso e melhorar os testes para todo mundo no longo-prazo."
+  },
+  "helpContributionSecondParagraph": {
+    "message": "Por favor, considere nos ajudar respondendo perguntas da comunidade e atualizando a documentação através dos links de ajuda acima. Você também pode ajudar a apoiar o"
+  },
+  "helpContributionThirdParagraph": {
+    "message": "financeiramente comprando seus"
+  },
+  "helpContributionFourthParagraph": {
+    "message": "cursos"
+  },
+  "helpContributionFifthParagraph": {
+    "message": "ou"
+  },
+  "helpContributionSixthParagraph": {
+    "message": "workshops remotos"
   }
 }
