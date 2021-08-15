@@ -9,6 +9,7 @@
     "build": "docusaurus build",
     "write-translations": "docusaurus-write-translations",
     "version": "docusaurus-version",
+    "serve": "docusaurus serve",
     "rename-version": "docusaurus-rename-version",
     "format-docs": "prettier --write 'docs/**/*.mdx' --parser=mdx",
     "swizzle": "docusaurus swizzle",
