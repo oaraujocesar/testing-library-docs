@@ -8,6 +8,7 @@
 import React from 'react'
 import Layout from '@theme/Layout'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import Translate, {translate} from '@docusaurus/Translate'
 import {Showcase} from '../components/Showcase'
 
 export default function Users(props) {
@@ -26,18 +27,28 @@ export default function Users(props) {
         <div>
           <div className="showcaseSection">
             <div className="prose">
-              <h1>Who is Using This?</h1>
-              <p>This project is used by many folks</p>
+              <h1>
+                <Translate id="usersTitle">Who is Using This?</Translate>
+              </h1>
+              <p>
+                <Translate id="usersSubtitle">
+                  This project is used by many folks
+                </Translate>
+              </p>
             </div>
             <div className="logos">
               <Showcase users={siteConfig.customFields.users} />
             </div>
-            <p>Are you using this project?</p>
+            <p>
+              <Translate id="usersQuestion">
+                Are you using this project?
+              </Translate>
+            </p>
             <a
               href={editUrl}
               className="button button--primary button--outline"
             >
-              Add your company
+              <Translate id="usersButton">Add your company</Translate>
             </a>
           </div>
         </div>

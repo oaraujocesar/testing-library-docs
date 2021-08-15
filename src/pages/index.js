@@ -64,7 +64,6 @@ const HomeSplash = props => {
       {props.children}
     </a>
   )
-  console.log(props, '@@@PROPS')
 
   return (
     <SplashContainer>
@@ -143,7 +142,7 @@ export default class Index extends React.Component {
     )
 
     const Solution = () => [
-      <Block background={null} align="left">
+      <Block background={null} align="left" key="solution-star">
         {[
           {
             title: '',
@@ -161,7 +160,7 @@ export default class Index extends React.Component {
           },
         ]}
       </Block>,
-      <Block background={'light'} align="left">
+      <Block background={'light'} align="left" key="solution-trophy">
         {[
           {
             title: translate({

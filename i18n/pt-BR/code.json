@@ -324,5 +324,17 @@
   },
   "helpContributionSixthParagraph": {
     "message": "workshops remotos"
+  },
+  "usersTitle": {
+    "message": "Quem está usando a Testing Library?"
+  },
+  "usersSubtitle": {
+    "message": "Este projeto é usado por muitas pessoas"
+  },
+  "usersQuestion": {
+    "message": "Você está usando este projeto?"
+  },
+  "usersButton": {
+    "message": "Adicione a sua empresa"
   }
 }
