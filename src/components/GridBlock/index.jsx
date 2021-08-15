@@ -40,7 +40,7 @@ const renderBlockTitle = title => {
 }
 
 export const GridBlock = props => {
-  const renderBlock = origBlock => {
+  const renderBlock = (origBlock, index) => {
     const blockDefaults = {
       imageAlign: 'left',
     }
@@ -74,7 +74,7 @@ export const GridBlock = props => {
       renderBlockImage(block.image, block.imageLink, block.imageAlt)
 
     return (
-      <div className={blockClasses} key={block.title}>
+      <div className={blockClasses} key={`${block.title}-${index}`}>
         {topLeftImage}
         <div className="blockContent">
           {renderBlockTitle(block.title)}
