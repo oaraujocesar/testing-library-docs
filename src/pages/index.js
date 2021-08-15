@@ -64,6 +64,7 @@ const HomeSplash = props => {
       {props.children}
     </a>
   )
+  console.log(props, '@@@PROPS')
 
   return (
     <SplashContainer>
@@ -71,7 +72,7 @@ const HomeSplash = props => {
       <div className="inner">
         <ProjectTitle siteConfig={siteConfig} />
         <div className="pluginWrapper buttonWrapper">
-          <Button href={'/docs/'}>
+          <Button href={`${baseUrl}docs/`}>
             <Translate id="gettingStartedButton">Get Started</Translate>
           </Button>
         </div>
