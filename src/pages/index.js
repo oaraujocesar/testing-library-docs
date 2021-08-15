@@ -170,7 +170,7 @@ export default class Index extends React.Component {
             image: `${baseUrl}img/trophy-128x128.png`,
             imageAlign: 'left',
             imageAlt: translate({
-              message: 'The guiding principle (picture of a brick wall)',
+              message: 'The guiding principle (picture of a trophy)',
               id: 'theGuidingPrincipleIcon',
             }),
             content: translate({
