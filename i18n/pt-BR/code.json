@@ -209,7 +209,7 @@
     "message": "Quanto mais seus testes parecerem com a forma que seu software é usado,"
   },
   "homepageQuote.secondPart": {
-    "message": "mais confiança eles te dão."
+    "message": "mais confiança eles podem te dar."
   },
   "theProblem": {
     "message": "## O Problema \n - Você quer testes para sua UI que evitem incluir detalhes da implementação e focar em fazer seus testes te darem confiança para o que eles foram feitos. \n - Você quer que seus testes sejam de fácil manutenção para que ao ser refatorado _(Mudanças na implementação mas não na funcionalidade)_ não quebrem e tornem o seu time lento"

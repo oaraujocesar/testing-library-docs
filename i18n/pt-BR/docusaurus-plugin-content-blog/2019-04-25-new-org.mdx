@@ -2,33 +2,35 @@
 # prettier doesn't like how long this line is.: ""
 # prettier-ignore: ""
 title:
-  'Testing Library Updates: new release, github org, open collective, and
-  twitter account'
+  'Atualizações da Testing Library: nova release, github org, open collective, e
+  conta do twitter'
 author: Kent C. Dodds
 authorURL: 'https://kentcdodds.com'
 authorImageURL: 'https://avatars0.githubusercontent.com/u/1500684?s=120&v=4'
 ---
 
-Hello friends! I'm pleased to announce the recent updates to the testing-library
-family of tools! As always, we're committed to giving you the best tools to
-enable you to have confidence in shipping your applications. That's why the
-guiding principle for everything we do is:
+Olá, amigos! é um prazer anunciar as mais recentes atualizações para a família
+testing-library de ferramentas! Como sempre, nós estamos comprometidos a
+distribuir as melhores ferramentas para te dar confiança ao distribuir suas
+aplicações. É por isso que o nosso princípio de orientação para todas as coisas
+é:
 
-> [The more your tests resemble the way your software is used, the more confidence they can give you.](https://twitter.com/kentcdodds/status/977018512689455106)
+> [Quanto mais seus testes parecerem com a forma que seu software é usado, mais confiança eles podem te dar.](https://twitter.com/kentcdodds/status/977018512689455106)
 
-This guiding principle has given us direction and we've been able to accomplish
-a lot in the testing space. To further our mission, I'd like to make a few
-announcements about changes going on in the testing-library world.
+Esse princípio tem nos dado direção e nós temos sido capazes de conquistar muita
+coisa no que diz respeito a testes. Para promover nossa missão, Eu gostaria de
+fazer alguns anúncios sobre mudanças acontecendo no mundo da testing-library.
 
-## [dom-testing-library](https://github.com/testing-library/dom-testing-library) v4 released!
+## [dom-testing-library](https://github.com/testing-library/dom-testing-library) v4 lançada!
 
-This is actually a pretty small release, but I think it's worth mentioning
-anyway. We try to keep breaking changes to a minimum. This release only has two
-breaking changes. One is removal of deprecated methods you probably weren't
-using anyway, and the other reveals potential bugs in your tests. So you should
-be able to upgrade to this version with little-to-no effort.
+Essa é, na verdade, uma release bem pequena mas acho que vale a pena mencionar,
+de qualquer forma. Nós tentamos manter o mínimo de breaking changes. Essa
+release só tem duas breaking changes. Uma é a remoção de métodos descontinuados
+os quais provavelmente vocês não estão usando, e a outra releva alguns bugs em
+potencial nos seus testes. Então vocês devem poder atualizar para essa nova
+versão com zero ou nenhum esforço.
 
-If you do experience breakages, it's probably due to something like this:
+Se você tiver problemas, é provavelmente devido a algo assim:
 
 <!-- prettier in my editor treats this like MDX, which turns this into a
 self-closing tag. But the parser docusaurus uses doesn't like that so we'll
@@ -40,27 +42,27 @@ just disable it here -->
   style={{width: '100%', height:500, border:0, borderRadius: 4, overflow:'hidden'}}   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 ></iframe>
 
-We hope that this helps you catch bugs better!
+Esperamos que isso te ajude a encontrar os bugs mais facilmente!
 
 [react-testing-library](https://github.com/testing-library/react-testing-library)
-and
+e
 [cypress-testing-library](https://github.com/testing-library/cypress-testing-library)
-have already been updated and released major version bumps of their own to
-account for this upgrade. Other wrappers will hopefully follow shortly based on
-their respective matinainers' schedules.
+já foram atualizadas e lançadas os bumps da versão principal delas mesmas para
+essa atualização. Outros wrappers vão, esperançosamente, seguir baseados nas
+suas respectivas agendas das pessoas mantenedoras.
 
-> [View the Changelog](https://github.com/testing-library/dom-testing-library/releases/tag/v4.0.0)
+> [Visualizar o Changelog](https://github.com/testing-library/dom-testing-library/releases/tag/v4.0.0)
 
-## [Testing Library on GitHub](https://github.com/testing-library)
+## [Testing Library no GitHub](https://github.com/testing-library)
 
-We've created a new org on GitHub to manage the family of testing library
-projects. The best part of the "Testing Library" isn't the code, but the
-philosophy behind it. So we're using the organization as a way to group all the
-projects that share the same philosophy and general utilities so whether you're
-using Vue, Cypress, or React (Native), you'll have a super testing tool that
-you're familiar with.
+Nós criamos uma nova organização no GitHub para gerenciar a família de projetos
+testing library. A melhor parte do "Testing Library" não é o código mas a
+filosofia por trás dele. Então nós estamos usando a organização como uma maneira
+de agrupar todos os projetos que compartilham da mesma filosofia e utilidades em
+geral então se você estiver usando Vue, Cypress, ou React (Native), você vai ter
+uma super ferramenta de testes com a qual já está familiarizado.
 
-Here are the current (or soon to be) members of the org:
+Aqui estão os atuais (ou serão em breve) membros da organização:
 
 - [dom-testing-library](https://github.com/testing-library/dom-testing-library)
 - [react-testing-library](https://github.com/testing-library/react-testing-library)
@@ -77,117 +79,121 @@ Here are the current (or soon to be) members of the org:
 - [jest-dom](https://github.com/testing-library/jest-dom)
 - [jest-native](https://github.com/testing-library/jest-native)
 
-(Hopefully we'll have
-[angular on there eventually](https://github.com/angular-extensions/testing-library/issues/4)
-[as well as ember](https://github.com/emberjs/rfcs/pull/327)).
+(Confiantemente vamos ter o
+[angular também, eventualmente](https://github.com/angular-extensions/testing-library/issues/4)
+[assim como o ember](https://github.com/emberjs/rfcs/pull/327)).
 
-What's cool is that building wrappers for your JavaScript framework of choice is
-often quite simple (as I demonstrate on
-[TestingJavaScript.com](https://testingjavascript.com)). And as mentioned below,
-you can carry these same principles to non-DOM platforms as well!
+O legal é que criando wrappers para seu framework JavaScript de preferência é
+frequentemente bem simples (como eu demonstrei no
+[TestingJavaScript.com](https://testingjavascript.com)). E como mencionei
+abaixo, você pode carregar esses mesmos princípios para plataformas non-DOM
+também!
 
-> [Checkout the Org and Star our Repos](https://github.com/testing-library)
+> [Veja nossa Org e deixe uma estrela nos nossos Repos](https://github.com/testing-library)
 
-## [Testing Library on Open Collective](https://opencollective.com/testing-library)
+## [Testing Library no Open Collective](https://opencollective.com/testing-library)
 
-If the Testing Library family of tools has provided you any value at all, we'd
-encourage you (or your employer) to contribute to our new
+Se a família Testing Library de ferramentas tem fornecido a você qualquer valor,
+nós encorajamos você (ou seu empregador) a contribuir com nossa nova
 [Open Collective](https://opencollective.com/testing-library).
 
-It is intended that funds raised by this open collective be used to:
+Pretende-se que os recursos arrecadados por esse Open Collective sejam usados
+​​para:
 
-- Donate to charities and other good causes
-- Purchase testing-library related merchandise (stickers, T-Shirts, etc).
-- Pay for hosting/domains/etc.
+- Doar a caridade e outras boas causas
+- Comprar mercadoria relacionada a testing-library (stickers, camisetas, etc).
+- Pagar por hospedagens/domínios/etc.
 
-There are currently no plans to pay people who work on the project, but we
-reserve the right to do so if it makes sense in the future.
+Atualmente não existem planos de pagar a pessoas que trabalham no projeto, mas
+nós reservamos o direito de fazê-lo se fizer sentido no futuro.
 
-> [Contribute to our open collective](https://opencollective.com/testing-library)
+> [Contribua com nosso open collective](https://opencollective.com/testing-library)
 
-## [Testing Library on Twitter](https://twitter.com/testinglib)
+## [Testing Library no Twitter](https://twitter.com/testinglib)
 
-A lot of chatter is going on in the Testing Library world on Twitter, so we've
-created a twitter account you can follow and keep up with what's going on.
+Muita conversa está rolando sobre o mundo da Testing Library no Twitter, então
+nós estamos criando uma conta no Twitter para você seguir e acompanhar o que
+está acontecendo.
 
-> [Follow @TestingLib](https://twitter.com/testinglib)
+> [Siga @TestingLib](https://twitter.com/testinglib)
 
-## [Testing Library on Spectrum](https://spectrum.chat/testing-library)
+## [Testing Library no Spectrum](https://spectrum.chat/testing-library)
 
-We've had a pretty active spectrum community for react-testing-library. We're in
-the process of moving that to a more general Testing Library spectrum so we can
-have all discussion around the different wrappers in one place. There are over
-600 members of our spectrum community (special shout-out to
-[Giorgio](https://spectrum.chat/users/gpx) who has been SUPER helpful to people
-there.) Please join us!
+Tivemos uma comunidade bastante ativa no spectrum para a react-testing-library.
+Nós estamos no processo de movê-la para uma Testing library no spectrum mais
+geral para que assim possamos discutir acerca de diferentes wrappers em um lugar
+centralizado. Existem mais de 600 membros da nossa comunidade no spectrum
+(mensagem especial para [Giorgio](https://spectrum.chat/users/gpx) que tem sido
+SUPER solícito para as pessoas lá.) por favor, junte-se a nós!
 
-> [Join us on Spectrum](https://spectrum.chat/testing-library)
+> [Junte-se a nós no Spectrum](https://spectrum.chat/testing-library)
 
-## [Testing Library on React Native](https://callstack.github.io/react-native-testing-library/)
+## [Testing Library no React Native](https://callstack.github.io/react-native-testing-library/)
 
-I'm really happy to announce a super solution to the React Native testing space.
-The DOM is quite different from native, as I mentioned before, it's not the code
-but the concepts that really make the Testing Library great. I'm happy to say
-that [Brandon Carroll](https://github.com/bcarroll22) has successfully ported
-those concepts to a solution for React Native and I'm really happy with it. Give
-it a look if you're building React Native applications and want confidence that
-they continue to work as you make changes!
+Eu estou muito animado em anunciar uma super solução para o espaço de testes do
+React Native. O DOM é bem diferente do nativo, como mencionei antes, não é o
+código mas os conceitos que realmente fazem a Testing Library uma ótima
+biblioteca. Eu estou feliz em dizer que o
+[Brandon Carroll](https://github.com/bcarroll22) portou com sucesso aqueles
+conceitos para uma solução pro React Native e eu estou realmente feliz com isso.
+Dêem uma olhada se estiverem criando aplicações com React Native e querem mais
+confiança que eles continuem a funcionar a medida que vocês fazem mudanças!
 
-> [Checkout native-testing-library](https://callstack.github.io/react-native-testing-library/)
+> [Veja native-testing-library](https://callstack.github.io/react-native-testing-library/)
 
-## [Learn Testing Library](https://testing-library.com/docs/learning)
+## [Aprenda a Testing Library](https://testing-library.com/docs/learning)
 
-There's been a LOT of activity around the Testing Library principles and tools
-in the content space. We do have
-[a page that lists learning materials](https://testing-library.com/docs/learning),
-and more gets added to it daily. If you know of blog posts, YouTube videos,
-courses, or anything else about the Testing Library family of tools, please
-contribute to the list!
+Tem existido MUITA atividade acerca dos princípios da Testing Library e
+ferramentas no espaço de conteúdo. Nós temos
+[que lista os materiais a serem aprendidos](https://testing-library.com/docs/learning),
+e mais materiais serão adicionados diariamente. Se você sabe sobre artigos,
+vídeos do YouTube, cursos, ou qualquer coisa sobre a família de ferramentas
+Testing Library, por favor, contribua com a lista!
 
-> [Contribute to the learning materials page](https://github.com/testing-library/testing-library-docs/edit/main/docs/learning.mdx)
+> [Contribua com a página de materials da Testing Library](https://github.com/testing-library/testing-library-docs/edit/main/docs/learning.mdx)
 
-## Other Exciting news
+## Outras notícias animadoras
 
-As of a few months ago,
-[the React team officially recommends](https://reactjs.org/blog/2019/02/06/react-v16.8.0.html)
-you use react-testing-library to test your react applications. That's kinda neat
-:)
+Alguns meses atrás,
+[O time oficial do React recomendou](https://reactjs.org/blog/2019/02/06/react-v16.8.0.html)
+que você usasse a react-testing-library para testar suas aplicações React. Isso
+é bem legal! :)
 
-At the React Amsterdam [Open Source awards](https://osawards.com/react/)
-ceremony, react-testing-library won the award for the Most impactful
-contribution to the community!
+Na cerimônia do React Amsterdam
+[Open Source awards](https://osawards.com/react/), a react-testing-library
+venceu o prêmio de Contribuição mais impactante para a comunidade!
 
-![Open Source Awards award](/img/blog/award.jpg)
+![Prêmio Open Source Awards](/img/blog/award.jpg)
 
-react-testing-library _also_ received recognition on the
+react-testing-library _também_ recebeu reconhecimento no
 [ThoughtWorks Technology Radar](https://www.thoughtworks.com/radar/languages-and-frameworks)
-as technology they believe is "Worth exploring with the goal of understanding
-how it will affect your enterprise." We think so too :)
+como a tecnologia que eles acreditam ser "Vale a pena explorar com o objetivo de
+compreender como isso afetará sua empresa." Nós também achamos :)
 
-## Special Thank You
+## Obrigado especial
 
-Each of the projects has had many contributors and on most projects in
-[the org](https://github.com/testing-library), you'll find a table of
-contributors. We're super grateful for all the contributions people have made to
-the projects. I'd like to also give a special shout-out to people who have made
-an especially significant impact on the Testing Library family of tools and
-community.
+Cada um dos projetos têm tido muitos contribuidores e na maioria dos projetos na
+[organização](https://github.com/testing-library), você vai achar a tabela de
+contribuidores. Nós somos super gratos a todas as contribuições que as pessoas
+deram aos projetos. Eu gostaria de, também, dar um obrigado especial para as
+pessoas que fizeram um impacto especialmente significante na família de
+ferramentas Testing Library e comunidade.
 
-[Myself 👋](https://kentcdodds.com), [Alex Krolick](https://alexkrolick.com/),
+[Eu mesmo 👋](https://kentcdodds.com), [Alex Krolick](https://alexkrolick.com/),
 [Brandon Carroll](https://github.com/bcarroll22),
 [Giorgio](https://twitter.com/Gpx),
-[Ernesto García](https://twitter.com/gnapse), and
+[Ernesto García](https://twitter.com/gnapse), e
 [Daniel Cook](https://github.com/dfcook).
 
-As I said, there have been many who have contributed a great deal to the
-community, but these people stand out to me as individuals who have done
-especially great work. Thank you!
+Como eu disse, existem muitos que contribuíram com coisas importantes para a
+comunidade, mas essas pessoas se destacaram para mim como pessoas que fizeram um
+trabalho realmente especial. Obrigado!
 
-## Conclusion
+## Conclusão
 
-No matter what platform you're working with, the guiding principles of the
-Testing Library family can be applied to the tests for that platform. Take a
-step back and consider how closely your tests are resembling the way your
-software is used. If you can, consider what lightweight but powerful utilities
-would enable others to test their software in that way as well and create a
-library for that! Maybe it can join the Testing Library family of tools!
+Não importa com qual plataforma você esteja trabalhando, os princípios da
+família Testing Library podem ser aplicados aos testes para ela. Dê um passo
+atrás e considere o quanto seus testes parecem com a forma que seu software é
+usado. Se você puder, considere que utilidades leves, mas poderosas permitiriam
+outros a testar seus softwares dessa maneira e criar uma biblioteca para isso
+também! Talvez ela possa se juntar a família de ferramentas Testing Library!
