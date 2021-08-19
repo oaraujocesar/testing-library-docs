@@ -3,8 +3,8 @@ id: api
 title: API
 ---
 
-`React Testing Library` re-exports everything from `DOM Testing Library` as well
-as these methods:
+A `React Testing Library` re-exporta tudo da `DOM Testing Library` assim como
+esses métodos:
 
 - [`render`](#render)
 - [`render` Options](#render-options)
@@ -32,12 +32,12 @@ as these methods:
 function render(
   ui: React.ReactElement<any>,
   options?: {
-    /* You won't often use this, expand below for docs on options */
+    /* Você não vai usar isso frequentemente, desça para mais informações sobre as options */
   },
 ): RenderResult
 ```
 
-Render into a container which is appended to `document.body`.
+Renderiza em um container que é anexado ao `document.body`.
 
 ```jsx
 import {render} from '@testing-library/react'
@@ -49,29 +49,31 @@ render(<div />)
 import {render} from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-test('renders a message', () => {
+test('renderiza uma mensagem', () => {
   const {container, getByText} = render(<Greeting />)
-  expect(getByText('Hello, world!')).toBeInTheDocument()
+  expect(getByText('Olá, Mundo!')).toBeInTheDocument()
   expect(container.firstChild).toMatchInlineSnapshot(`
-    <h1>Hello, World!</h1>
+    <h1>Olá, Mundo!</h1>
   `)
 })
 ```
 
 ## `render` Options
 
-You won't often need to specify options, but if you ever do, here are the
-available options which you could provide as a second argument to `render`.
+Você não vai precisar especificar as opções frequentemente, mas se você precisar
+em algum moment aqui estão as opções disponíveis que você pode usar como segundo
+argumento para o `render`.
 
 ### `container`
 
-By default, `React Testing Library` will create a `div` and append that `div` to
-the `document.body` and this is where your React component will be rendered. If
-you provide your own HTMLElement `container` via this option, it will not be
-appended to the `document.body` automatically.
+Por padrão, a `React Testing Library` vai criar uma `div` e anexá-la ao
+`document.body` que é onde o seu componente React vai ser renderizado. Se você
+passar o seu próprio HTMLElement `container` por essa opção, ele não será
+anexado ao `document.body` automaticamente.
 
-For example: If you are unit testing a `tablebody` element, it cannot be a child
-of a `div`. In this case, you can specify a `table` as the render `container`.
+Por exemplo: Se você está testando unitariamente um elemento `tablebody`, ele
+não poderá ser uma child de uma `div`. Nesse caso, você pode especificar uma
+`table` como o render `container`.
 
 ```jsx
 const table = document.createElement('table')
@@ -83,30 +85,31 @@ const {container} = render(<TableBody {...props} />, {
 
 ### `baseElement`
 
-If the `container` is specified, then this defaults to that, otherwise this
-defaults to `document.body`. This is used as the base element for the queries as
-well as what is printed when you use `debug()`.
+Se o `container` for especificado, então o padrão é ele mesmo, do contrário o
+padrão é o `document.body`. Ele é utilizado como o elemento base para as queries
+assim como o que é mostrado quando você usa o `debug()`.
 
 ### `hydrate`
 
-If hydrate is set to true, then it will render with
-[ReactDOM.hydrate](https://reactjs.org/docs/react-dom.html#hydrate). This may be
-useful if you are using server-side rendering and use ReactDOM.hydrate to mount
-your components.
+Se o hydrate é definido como true, então será renderizado com o
+[ReactDOM.hydrate](https://reactjs.org/docs/react-dom.html#hydrate). Isso pode
+ser útil se você estiver usando SSR (server-side rendering) e usa o
+ReactDOM.hydrate para montar seus componentes.
 
 ### `wrapper`
 
-Pass a React Component as the `wrapper` option to have it rendered around the
-inner element. This is most useful for creating reusable custom render functions
-for common data providers. See [setup](setup.mdx#custom-render) for examples.
+Passa um Componente React como a opção `wrapper` para ser renderizado ao redor
+de um elemento interno. Isso é bem útil para criar funções customizadas de
+renderização para providers comuns de informação. Veja
+[configuração](setup.mdx#custom-render) para exemplos.
 
 ### `queries`
 
-Queries to bind. Overrides the default set from `DOM Testing Library` unless
-merged.
+Queries para vincular. Sobrescreve o conjunto padrão do `DOM Testing Library` a
+menos que seja "mergeado".
 
 ```js
-// Example, a function to traverse table contents
+// Exemplo, uma função para percorrer o conteúdo da tabela
 import * as tableQueries from 'my-table-query-library'
 import {queries} from '@testing-library/react'
 
@@ -115,26 +118,26 @@ const {getByRowColumn, getByText} = render(<MyTable />, {
 })
 ```
 
-See [helpers](dom-testing-library/api-custom-queries.mdx) for guidance on using
-utility functions to create custom queries.
+Veja [helpers](dom-testing-library/api-custom-queries.mdx) para orientação em
+como usar funções de utilidade para criar queries customizadas.
 
-Custom queries can also be added globally by following the
-[custom render guide](setup.mdx#custom-render).
+Queries customizadas também podem ser adicionadas globalmente seguindo o
+[Guia de renderização customizada](setup.mdx#custom-render).
 
 ## `render` Result
 
-The `render` method returns an object that has a few properties:
+O método `render` retorna um objeto que contém algumas propriedades:
 
 ### `...queries`
 
-The most important feature of `render` is that the queries from
-[DOM Testing Library](queries/about.mdx) are automatically returned with their
-first argument bound to the [baseElement](#baseelement), which defaults to
+A feature mais importante do `render` é que as queries do
+[DOM Testing Library](queries/about.mdx) são automaticamente retornadas com seus
+primeiros argumentos ligados ao [baseElement](#baseelement), cujo padrão é o
 `document.body`.
 
-See [Queries](queries/about.mdx) for a complete list.
+Veja [Queries](queries/about.mdx) para uma listagem completa.
 
-**Example**
+**Exemplo**
 
 ```jsx
 const {getByLabelText, queryAllByTestId} = render(<Component />)
@@ -142,42 +145,43 @@ const {getByLabelText, queryAllByTestId} = render(<Component />)
 
 ### `container`
 
-The containing DOM node of your rendered React Element (rendered using
-`ReactDOM.render`). It's a `div`. This is a regular DOM node, so you can call
-`container.querySelector` etc. to inspect the children.
+O nó do DOM que está contido no seu Elemento React (renderizado usando o
+`ReactDOM.render`). É uma `div`. Esse é um nó comum do DOM, então você pode
+chamar `container.querySelector` e etc. para inspecionar seus filhos.
 
-> Tip: To get the root element of your rendered element, use
+> Dica: Para pegar o elemento raiz do seu elemento renderizado, use
 > `container.firstChild`.
 >
-> NOTE: When that root element is a
+> NOTA: Quando esse elemento raiz for um
 > [React Fragment](https://reactjs.org/docs/fragments.html),
-> `container.firstChild` will only get the first child of that Fragment, not the
-> Fragment itself.
+> `container.firstChild` somente irá pegar o primeiro filho desse Fragment, não
+> o próprio Fragment.
 
-> 🚨 If you find yourself using `container` to query for rendered elements then
-> you should reconsider! The other queries are designed to be more resilient to
-> changes that will be made to the component you're testing. Avoid using
-> `container` to query for elements!
+> 🚨 Se você se pegar usando `container` para buscar por elementos renderizados
+> então você deveria reconsiderar! As outras queries são desenhadas para serem
+> mais resilientes à mudanças que vão ser feitas no componente que você esta
+> testando. Evite usar `container` para buscar por elementos!
 
 ### `baseElement`
 
-The containing DOM node where your React Element is rendered in the container.
-If you don't specify the `baseElement` in the options of `render`, it will
-default to `document.body`.
+O nó do DOM que onde seu Elemento React é renderizado no container. Se você não
+especificar o `baseElement` nas opções do render, o padrão será o
+`document.body`.
 
-This is useful when the component you want to test renders something outside the
-container div, e.g. when you want to snapshot test your portal component which
-renders its HTML directly in the body.
+Isso é útil quando o componente que você quer testar renderiza algo fora do
+container div, exemplo: quando você quer testar um snapshop de um componente
+portal que renderiza seu HTML diretamente no body.
 
-> Note: the queries returned by the `render` looks into baseElement, so you can
-> use queries to test your portal component without the baseElement.
+> Nota: as queries retornadas pelo `render` olham para dentro do baseElement,
+> assim você pode usar as queries para testar seu componente portal sem o
+> baseElement.
 
 ### `debug`
 
-> NOTE: It's recommended to use [`screen.debug`](queries/about.mdx#screendebug)
-> instead.
+> NOTA: É recomendado usar o [`screen.debug`](queries/about.mdx#screendebug) ao
+> invés do `debug`.
 
-This method is a shortcut for `console.log(prettyDOM(baseElement))`.
+Esse método é um atalho para o `console.log(prettyDOM(baseElement))`.
 
 ```jsx
 import React from 'react'
@@ -187,58 +191,59 @@ const HelloWorld = () => <h1>Hello World</h1>
 const {debug} = render(<HelloWorld />)
 debug()
 // <div>
-//   <h1>Hello World</h1>
+//   <h1>Olá, mundo!</h1>
 // </div>
-// you can also pass an element: debug(getByTestId('messages'))
-// and you can pass all the same arguments to debug as you can
-// to prettyDOM:
+// você também pode passar um elemento: debug(getByTestId('messages'))
+// e você pode passar todos os mesmos argumentos para o debug assim como
+// você passa para o prettyDOM:
 // const maxLengthToPrint = 10000
 // debug(getByTestId('messages'), maxLengthToPrint, {highlight: false})
 ```
 
-This is a simple wrapper around `prettyDOM` which is also exposed and comes from
-[`DOM Testing Library`](dom-testing-library/api-debugging.mdx#prettydom).
+Esse é um simples wrapper ao redor do `prettyDOM` o qual é também exposto e vem
+do [`DOM Testing Library`](dom-testing-library/api-debugging.mdx#prettydom).
 
 ### `rerender`
 
-It'd probably be better if you test the component that's doing the prop updating
-to ensure that the props are being updated correctly (see
-[the Guiding Principles section](guiding-principles.mdx)). That said, if you'd
-prefer to update the props of a rendered component in your test, this function
-can be used to update props of the rendered component.
+Seria provavelmente melhor se você testasse o componente que está fazendo a
+atualização da prop para garantir que as props estão sendo atualizadas
+corretamente (Veja
+[a Seção de Princípios Orientadores](guiding-principles.mdx)). Dito isto, se
+você preferir atualizar as props de um componente renderizado no seu teste, essa
+função pode ser usada.
 
 ```jsx
 import {render} from '@testing-library/react'
 
 const {rerender} = render(<NumberDisplay number={1} />)
 
-// re-render the same component with different props
+// renderiza novamente o mesmo componente com props diferentes
 rerender(<NumberDisplay number={2} />)
 ```
 
-[See the examples page](example-update-props.mdx)
+[Veja a página de exemplos](example-update-props.mdx)
 
 ### `unmount`
 
-This will cause the rendered component to be unmounted. This is useful for
-testing what happens when your component is removed from the page (like testing
-that you don't leave event handlers hanging around causing memory leaks).
+Causa o desmonte de um componente renderizado. Isso é útil para testar o que
+acontece quando seu componente é removido da página (tipo testar se você não
+deixa event handlers causando memory leaks por aí).
 
-> This method is a pretty small abstraction over
-> `ReactDOM.unmountComponentAtNode`
+> Esse método é uma abstração bem pequena do `ReactDOM.unmountComponentAtNode`
 
 ```jsx
 import {render} from '@testing-library/react'
 
 const {container, unmount} = render(<Login />)
 unmount()
-// your component has been unmounted and now: container.innerHTML === ''
+// seu componente foi desmontado e agora: container.innerHTML === ''
 ```
 
 ### `asFragment`
 
-Returns a `DocumentFragment` of your rendered component. This can be useful if
-you need to avoid live bindings and see how your component reacts to events.
+Retorna um `DocumentFragment` do seu componente renderizado. Isso pode ser útil
+se você precisa evitar live bindings e precisa ver se seu componente reage a
+eventos.
 
 ```jsx
 import React, {useState} from 'react'
@@ -259,9 +264,9 @@ const firstRender = asFragment()
 
 fireEvent.click(getByText(/Click to increase/))
 
-// This will snapshot only the difference between the first render, and the
-// state of the DOM after the click event.
-// See https://github.com/jest-community/snapshot-diff
+// Isso vai criar um snapshot apenas com as diferenças entre a primeira renderização, e o
+// estado do DOM deposi do evento de click.
+// Veja https://github.com/jest-community/snapshot-diff
 expect(firstRender).toMatchDiffSnapshot(asFragment())
 ```
 
@@ -269,15 +274,16 @@ expect(firstRender).toMatchDiffSnapshot(asFragment())
 
 ## `cleanup`
 
-Unmounts React trees that were mounted with [render](#render).
+Desmonta a árvore React que montamos com o [render](#render).
 
-> Please note that this is done automatically if the testing framework you're
-> using supports the `afterEach` global and it is injected to your testing
-> environment (like mocha, Jest, and Jasmine). If not, you will need to do
-> manual cleanups after each test.
+> Por favor, note que isso é feito de forma automática se o framework de testes
+> que você está usando suporta o `afterEach` global e é injetado no seu ambiente
+> de testes (como mocha, Jest, and Jasmine). Se não, você precisará fazer
+> limpezas manuais após cada um dos testes.
 
-For example, if you're using the [ava](https://github.com/avajs/ava) testing
-framework, then you would need to use the `test.afterEach` hook like so:
+Por exemplo, se você estiver usando o framework de testes
+[ava](https://github.com/avajs/ava), então você precisará utilizar o hook
+`test.afterEach` assim:
 
 ```jsx
 import {cleanup, render} from '@testing-library/react'
@@ -290,19 +296,19 @@ test('renders into document', () => {
   // ...
 })
 
-// ... more tests ...
+// ... mais testes ...
 ```
 
-Failing to call `cleanup` when you've called `render` could result in a memory
-leak and tests which are not "idempotent" (which can lead to difficult to debug
-errors in your tests).
+Falhas ao chamar o `cleanup` quando você chamou `render` podem resultar em
+memory leaks e testes que não são "idempotentes" (os quais podem levar a
+dificuldades para debugar erros nos seus testes)
 
 ---
 
 ## `act`
 
-This is a light wrapper around the
-[`react-dom/test-utils` `act` function](https://reactjs.org/docs/test-utils.html#act).
-All it does is forward all arguments to the act function if your version of
-react supports `act`. It is recommended to use the import from
-`@testing-library/react` over `react-dom/test-utils` for consistency reasons.
+Esse é um wrapper leve acerca do
+[`react-dom/test-utils` função `act`](https://reactjs.org/docs/test-utils.html#act).
+Tudo que ele faz é passar todos os argumentos para a função act se sua versão
+suportar o `act`. É recomendado o uso da importação da `@testing-library/react`
+no lugar de react-dom/test-utils` por razões de consistência.
