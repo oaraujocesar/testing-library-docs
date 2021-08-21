@@ -1,12 +1,12 @@
 ---
 id: example-intro
-title: Example
-sidebar_label: Example
+title: Exemplo
+sidebar_label: Exemplo
 ---
 
-## Full Example
+## Exemplo Completo
 
-See the following sections for a detailed breakdown of the test
+Veja as seções a seguir para uma análise detalhada do teste
 
 ```jsx
 // __tests__/fetch.test.js
@@ -19,7 +19,7 @@ import Fetch from '../fetch'
 
 const server = setupServer(
   rest.get('/greeting', (req, res, ctx) => {
-    return res(ctx.json({greeting: 'hello there'}))
+    return res(ctx.json({greeting: 'olá'}))
   }),
 )
 
@@ -27,18 +27,18 @@ beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
-test('loads and displays greeting', async () => {
+test('carrega e mostra a saudação', async () => {
   render(<Fetch url="/greeting" />)
 
-  fireEvent.click(screen.getByText('Load Greeting'))
+  fireEvent.click(screen.getByText('Carregando Saudação'))
 
   await waitFor(() => screen.getByRole('heading'))
 
-  expect(screen.getByRole('heading')).toHaveTextContent('hello there')
+  expect(screen.getByRole('heading')).toHaveTextContent('olá')
   expect(screen.getByRole('button')).toBeDisabled()
 })
 
-test('handles server error', async () => {
+test('trata um erro de servidor', async () => {
   server.use(
     rest.get('/greeting', (req, res, ctx) => {
       return res(ctx.status(500))
@@ -47,44 +47,45 @@ test('handles server error', async () => {
 
   render(<Fetch url="/greeting" />)
 
-  fireEvent.click(screen.getByText('Load Greeting'))
+  fireEvent.click(screen.getByText('Carregando Saudação'))
 
   await waitFor(() => screen.getByRole('alert'))
 
-  expect(screen.getByRole('alert')).toHaveTextContent('Oops, failed to fetch!')
+  expect(screen.getByRole('alert')).toHaveTextContent('Oops, falha ao buscar!')
   expect(screen.getByRole('button')).not.toBeDisabled()
 })
 ```
 
-> We recommend using [Mock Service Worker](https://github.com/mswjs/msw) library
-> to declaratively mock API communication in your tests instead of stubbing
-> `window.fetch`, or relying on third-party adapters.
+> Nós recomendamos o uso da biblioteca
+> [Mock Service Worker](https://github.com/mswjs/msw) para declaradamente mockar
+> a comunicação da API nos seus testes ao invés de usar o stub `window.fetch`,
+> ou confiar em adaptadores de terceiros.
 
 ---
 
-## Step-By-Step
+## Passo-a-passo
 
 ### Imports
 
 ```jsx
-// import dependencies
+// importa as dependências
 import React from 'react'
 
-// import API mocking utilities from Mock Service Worker
+// importa utilidades de mocking para API a partir do Mock Service Worker
 import {rest} from 'msw'
 import {setupServer} from 'msw/node'
 
-// import react-testing methods
+// importa métodos do react-testing-library
 import {render, fireEvent, waitFor, screen} from '@testing-library/react'
 
-// add custom jest matchers from jest-dom
+// adiciona matchers do jest customizados a partir da jest-dom
 import '@testing-library/jest-dom'
-// the component to test
+// O componente a ser testado
 import Fetch from '../fetch'
 ```
 
 ```jsx
-test('loads and displays greeting', async () => {
+test('carrega e mostra a saudação', async () => {
   // Arrange
   // Act
   // Assert
@@ -93,33 +94,33 @@ test('loads and displays greeting', async () => {
 
 ### Mock
 
-Use the `setupServer` function from `msw` to mock an API request that our tested
-component makes.
+Use a função `setupServer` do `msw` para mockar uma requisição da API que nosso
+componente testado faz.
 
 ```js
-// declare which API requests to mock
+// declara qual API faz a requisição para o mock
 const server = setupServer(
-  // capture "GET /greeting" requests
+  // captura requisições "GET /greeting"
   rest.get('/greeting', (req, res, ctx) => {
-    // respond using a mocked JSON body
-    return res(ctx.json({greeting: 'hello there'}))
+    // responde usando um body mockado no formato JSON
+    return res(ctx.json({greeting: 'olá'}))
   }),
 )
 
-// establish API mocking before all tests
+// estabelece o mock da API antes de todos os testes
 beforeAll(() => server.listen())
-// reset any request handlers that are declared as a part of our tests
-// (i.e. for testing one-time error scenarios)
+// reseta qualquer handler de requisição que for declarado como parte dos nossos testes
+// (exemplo: para cenários de erros que acontecem somente uma vez no teste)
 afterEach(() => server.resetHandlers())
-// clean up once the tests are done
+// faz a limpeza uma vez que os testes terminaram
 afterAll(() => server.close())
 
 // ...
 
-test('handlers server error', async () => {
+test('trata um erro de servidor', async () => {
   server.use(
-    // override the initial "GET /greeting" request handler
-    // to return a 500 Server Error
+    // sobrescreve o "GET /greeting" handler de requisição inicial
+    // para retornar um 500 Server Error
     rest.get('/greeting', (req, res, ctx) => {
       return res(ctx.status(500))
     }),
@@ -131,7 +132,7 @@ test('handlers server error', async () => {
 
 ### Arrange
 
-The [`render`](api.mdx#render) method renders a React element into the DOM.
+O método [`render`](api.mdx#render) renderiza um elemento React no DOM.
 
 ```jsx
 render(<Fetch url="/greeting" />)
@@ -139,18 +140,18 @@ render(<Fetch url="/greeting" />)
 
 ### Act
 
-The [`fireEvent`](dom-testing-library/api-events.mdx) method allows you to fire
-events to simulate user actions.
+O método [`fireEvent`](dom-testing-library/api-events.mdx) te permite disparar
+eventos para simular ações do usuário.
 
 ```jsx
-fireEvent.click(screen.getByText('Load Greeting'))
+fireEvent.click(screen.getByText('Carregando Saudação'))
 
-// wait until the `get` request promise resolves and
-// the component calls setState and re-renders.
-// `waitFor` waits until the callback doesn't throw an error
+// espere até a promise da requisição `get` ser resolvida e
+// o componente chamar setState e renderizar novamente.
+// `waitFor` espera até que o retorno de chamada não gere um erro
 
 await waitFor(() =>
-  // getByRole throws an error if it cannot find an element
+  // getByRole gera um erro se não conseguir encontrar o elemento
   screen.getByRole('heading'),
 )
 ```
@@ -158,16 +159,16 @@ await waitFor(() =>
 ### Assert
 
 ```jsx
-// assert that the alert message is correct using
-// toHaveTextContent, a custom matcher from jest-dom.
-expect(screen.getByRole('alert')).toHaveTextContent('Oops, failed to fetch!')
+// assegura que a mensagem do alert está correta usando
+// toHaveTextContent, um matcher customizável da jest-dom.
+expect(screen.getByRole('alert')).toHaveTextContent('Oops, falha ao buscar!')
 
-// assert that the button is not disabled using
-// toBeDisabled, a custom matcher from jest-dom.
+// assegura que o botão não está desativado usando o
+// toBeDisabled, um matcher customizável da jest-dom.
 expect(screen.getByRole('button')).not.toBeDisabled()
 ```
 
-### System Under Test
+### Sistema sob testes
 
 fetch.js
 
@@ -220,7 +221,7 @@ export default function Fetch({url}) {
         dispatch({type: 'ERROR', error})
       })
 
-  const buttonText = buttonClicked ? 'Ok' : 'Load Greeting'
+  const buttonText = buttonClicked ? 'Ok' : 'Carregando Saudação'
 
   return (
     <div>
@@ -228,7 +229,7 @@ export default function Fetch({url}) {
         {buttonText}
       </button>
       {greeting && <h1>{greeting}</h1>}
-      {error && <p role="alert">Oops, failed to fetch!</p>}
+      {error && <p role="alert">Oops, falha ao buscar!</p>}
     </div>
   )
 }
