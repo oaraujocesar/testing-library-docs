@@ -1,60 +1,60 @@
 ---
 id: introduction
-title: Introduction
+title: Introdução
 slug: /
 ---
 
-The [`@testing-library`][npm] family of packages helps you test UI components in
-a user-centric way.
+A família de pacotes da [`@testing-library`][npm] ajuda você a testar
+componentes da IU de uma forma centrada no usuário.
 
-> [The more your tests resemble the way your software is used, the more confidence they can give you.](guiding-principles.mdx)
+> [Quanto mais seus testes se assemelham à forma como o software é usado, mais confiança eles podem lhe dar.](guiding-principles.mdx)
 
-## The problem
+## O Problema
 
-You want to write maintainable tests that give you high confidence that your
-components are working for your users. As a part of this goal, you want your
-tests to avoid including implementation details so refactors of your components
-(changes to implementation but not functionality) don't break your tests and
-slow you and your team down.
+Você deseja escrever testes de manutenção que lhe forneça alta confiança de que
+seus componentes estão funcionando para os usuários. Como parte desse objetivo,
+você deseja que os testes evitem incluir detalhes de implementação, para que as
+refatorações dos seus componentes (mudanças na forma de implementar, e não de
+funcionalidade) não quebrem seus testes e atrasem você e sua equipe
 
-## The solution
+## A solução
 
-The core library, [`DOM Testing Library`][dom], is a light-weight solution for
-testing web pages by querying and interacting with DOM nodes (whether simulated
-with [`JSDOM`][jsdom]/[Jest][jest] or in the browser). The main utilities it
-provides involve querying the DOM for nodes in a way that's similar to how the
-user finds elements on the page. In this way, the library helps ensure your
-tests give you confidence that your application will work when a real user uses
-it.
+O core da [`DOM Testing Library`][dom], é uma solução leve para testar paginas
+web consultando e interagindo com os nós do DOM (sejam simulados com
+[`JSDOM`][jsdom]/[Jest][jest] ou no navegador). Os principais utilitários
+consiste em consultar o DOM em busca de nós de uma maneira semelhante como um
+usuário encontra esses elementos na página. Dessa forma, a biblioteca ajuda a
+garantir que seus testes dão a você a confiança de que sua aplicação irá
+funcionar quando um usuário real usar ele.
 
-The core library has been wrapped to provide ergonomic APIs for several
-frameworks, including [React][react], [Angular][angular], and [Vue][vue]. There
-is also a plugin to use testing-library queries for end-to-end tests in
-[Cypress][cypress] and an implementation for [React Native][react-native].
+O core da biblioteca foi agrupada para fornecer APIs fáceis para diversos
+frameworks, incluindo [React][react], [Angular][angular] e [Vue][vue]. Também
+existe um plugin para usar as buscas da testing-library para testes end-to-end
+em [Cypress][cypress] e uma implementação para [React Native][react-native].
 
-### What this library is not
+### O que essa biblioteca não é
 
-1.  A test runner or framework
-2.  Specific to a testing framework
+1.  Um executor de testes ou framework
+2.  Específico para um framework de teste
 
-`DOM Testing Library` works with any environment that provides DOM APIs, such as
-Jest, Mocha + JSDOM, or a real browser
+`DOM Testing Library` funciona com qualquer ambiente que fornece APIs do DOM,
+como Jest, Mocha + JSDOM ou um navegador
 
-### What you should avoid with Testing Library
+### O que você deve evitar com o Testing Library
 
-Testing Library encourages you to avoid testing
-[implementation details](https://kentcdodds.com/blog/testing-implementation-details)
-like the internals of a component you're testing (though it's still possible).
-[The Guiding Principles](/docs/guiding-principles) of this library emphasize a
-focus on tests that closely resemble how your web pages are interacted by the
-users.
+A Testing Library incentiva você a evitar testes de
+[detalhes de implementação](https://kentcdodds.com/blog/testing-implementation-details)
+como as partes internas de um componente que você está testando (embora ainda
+seja possível). [Os Princípios Orientadores](/docs/guiding-principles) desta
+biblioteca enfatiza na concentração de testes que se assemelham muito à forma
+como suas páginas da web interagem pelos usuários.
 
-You may want to avoid the following implementation details:
+Você pode querer evitar os seguintes detalhes de implementação:
 
-1. Internal state of a component
-1. Internal methods of a component
-1. Lifecycle methods of a component
-1. Child components
+1. Estado interno de um componente
+1. Métodos internos de um componente
+1. Métodos de ciclo de vida de um componente
+1. Componentes filhos
 
 [jest]: https://jestjs.io
 [jsdom]: https://github.com/jsdom/jsdom
