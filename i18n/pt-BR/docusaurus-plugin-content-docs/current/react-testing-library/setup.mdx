@@ -1,35 +1,36 @@
 ---
 id: setup
-title: Setup
-sidebar_label: Setup
+title: Configuração
+sidebar_label: Configuração
 ---
 
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-`React Testing Library` does not require any configuration to be used. However,
-there are some things you can do when configuring your testing framework to
-reduce some boilerplate. In these docs we'll demonstrate configuring Jest, but
-you should be able to do similar things with
-[any testing framework](#using-without-jest) (React Testing Library does not
-require that you use Jest).
+A `React Testing Library` não precisa de nenhuma configuração para ser usado. No
+entanto, existem algumas coisas que você pode fazer ao configurar seu framework
+de testes para reduzir o boilerplate. Nessa documentação vamos demonstrar como
+configurar o Jest, mas você pode fazer algo similar para
+[qualquer framework de testes](#using-without-jest) (A React Testing Library não
+requer que você use Jest).
 
-## Global Config
+## Configuração Global
 
-Adding options to your global test config can simplify the setup and teardown of
-tests in individual files.
+Adicionar opções à sua configuração de testes global pode simplificar a
+configuração e a desmontagem de testes em arquivos individuais.
 
-## Custom Render
+## Renderização Customizada
 
-It's often useful to define a custom render method that includes things like
-global context providers, data stores, etc. To make this available globally, one
-approach is to define a utility file that re-exports everything from
-`React Testing Library`. You can replace React Testing Library with this file in
-all your imports. See [below](#configuring-jest-with-test-utils) for a way to
-make your test util file accessible without using relative paths.
+É frequentemente útil para definir método de renderização customizado que inclui
+coisas como providers de contexto global, data stores, etc. Para tornar isso
+disponível globalmente, uma das formas é definir um arquivo de utilidades que
+re-exporta tudo da `React Testing Library`. Você pode substituir a React Testing
+Library com esse arquivo em todas as suas importações. Veja
+[abaixo](#configuring-jest-with-test-utils) uma forma de fazer seu arquivo de
+utilidade de testes ser acessível sem o uso de relative paths.
 
-The example below sets up data providers using the [`wrapper`](api.mdx#wrapper)
-option to `render`.
+O exemplo abaixo configura data providers usando a opção
+[`wrapper`](api.mdx#wrapper) para `render`.
 
   <Tabs groupId="test-utils" defaultValue="jsx" values={[ {label: 'Javascript',
   value: 'jsx'}, {label: 'Typescript', value: 'tsx'}, ]}>
@@ -61,10 +62,10 @@ const AllTheProviders = ({children}) => {
 const customRender = (ui, options) =>
   render(ui, {wrapper: AllTheProviders, ...options})
 
-// re-export everything
+// re-exporta tudo
 export * from '@testing-library/react'
 
-// override render method
+// sobrescreve o método render
 export {customRender as render}
 ```
 
@@ -107,23 +108,24 @@ export {customRender as render}
 
   </Tabs>
 
-> **Note**
+> **Nota**
 >
-> Babel versions lower than 7 throw an error when trying to override the named
-> export in the example above. See
-> [#169](https://github.com/testing-library/react-testing-library/issues/169)
-> and the workaround below.
+> Versões do Babel menores que 7 geram um erro quando se tenta sobrescrever um
+> named export no exemplo acima. Veja
+> [#169](https://github.com/testing-library/react-testing-library/issues/169) e
+> o workaround abaixo.
 
-<summary>Workaround for Babel 6</summary>
+<summary>Workaround para o Babel 6</summary>
 
-You can use CommonJS modules instead of ES modules, which should work in Node:
+Você pode usar CommonJS modules ao invés de ES modules, o que deve funcionar no
+Node:
 
 ```js title="test-utils.js"
 const rtl = require('@testing-library/react')
 
 const customRender = (ui, options) =>
   rtl.render(ui, {
-    myDefaultOption: 'something',
+    myDefaultOption: 'alguma coisa',
     ...options,
   })
 
@@ -133,41 +135,43 @@ module.exports = {
 }
 ```
 
-### Add custom queries
+### Adicione queries customizadas
 
-> **Note**
+> **Nota**
 >
-> Generally you should not need to create custom queries for
-> react-testing-library. Where you do use it, you should consider whether your
-> new queries encourage you to test in a user-centric way, without testing
-> implementation details.
+> Geralmente você não deveria precisar criar uma query customizada para a
+> react-testing-library. Onde você usa isso, você pode considerar se suas novas
+> queries te encorajam a testar de uma forma centrada no usuário, sem testar
+> detalhes da implementação.
 
-You can define your own custom queries as described in the
-[Custom Queries](dom-testing-library/api-custom-queries.mdx) documentation, or
-via the
-[`buildQueries`](dom-testing-library/api-custom-queries.mdx#buildqueries)
-helper. Then you can use them in any render call using the `queries` option. To
-make the custom queries available globally, you can add them to your custom
-render method as shown below.
+Você pode definir suas próprias queries customizadas como descrito na
+documentação de
+[Queries Customizadas](dom-testing-library/api-custom-queries.mdx), ou através
+do helper
+[`buildQueries`](dom-testing-library/api-custom-queries.mdx#buildqueries). E
+então você pode usá-las em qualquer chamada de renderização usando a opção
+`queries`. Para fazer com que as queries customizadas estejam disponíveis
+globalmente, você pode adicioná-las ao seu método de renderização customizado
+como mostrado abaixo.
 
-In the example below, a new set of query variants are created for getting
-elements by `data-cy`, a "test ID" convention mentioned in the
-[Cypress.io](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements)
-documentation.
+No exemplo abaixo, um novo conjunto de variantes de uma query são criados para
+pegar elementos pelo seu `data-cy`, uma convenção de "test ID" mencionada na
+documentação do
+[Cypress.io](https://docs.cypress.io/guides/references/best-practices.html#Selecting-Elements).
 
 ```js title="custom-queries.js"
 import {queryHelpers, buildQueries} from '@testing-library/react'
 
-// The queryAllByAttribute is a shortcut for attribute-based matchers
-// You can also use document.querySelector or a combination of existing
-// testing library utilities to find matching nodes for your query
+// A queryAllByAttribute é um atalho para matchers baseados em atributos
+// Você também pode usar document.queryselector ou uma combinação de
+// utilidades da testing library existentes para encontrar nodes correspondentes para sua query
 const queryAllByDataCy = (...args) =>
   queryHelpers.queryAllByAttribute('data-cy', ...args)
 
 const getMultipleError = (c, dataCyValue) =>
-  `Found multiple elements with the data-cy attribute of: ${dataCyValue}`
+  `Foram encontrados multiplos elementos com o atributo data-cy com o valor: ${dataCyValue}`
 const getMissingError = (c, dataCyValue) =>
-  `Unable to find an element with the data-cy attribute of: ${dataCyValue}`
+  `Não foi possível encontrar um elemento com o atributo data-cy de valor: ${dataCyValue}`
 
 const [
   queryByDataCy,
@@ -187,11 +191,11 @@ export {
 }
 ```
 
-You can then override and append the new queries via the render function by
-passing a [`queries`](api.mdx#render-options) option.
+Você pode sobrescrever e anexar as novas queries através da função de render ao
+passar uma opção [`queries`](api.mdx#render-options).
 
-If you want to add custom queries globally, you can do this by defining a custom
-render method:
+Se você quiser adicionar queries customizadas globalmente, você pode fazer isso
+definindo um método de renderização customizado:
 
   <Tabs groupId="test-utils" defaultValue="jsx" values={[ {label: 'Javascript',
   value: 'jsx'}, {label: 'Typescript', value: 'tsx'}, ]}>
@@ -206,10 +210,10 @@ import * as customQueries from './custom-queries'
 const customRender = (ui, options) =>
   render(ui, {queries: {...queries, ...customQueries}, ...options})
 
-// re-export everything
+// re-exporta tudo
 export * from '@testing-library/react'
 
-// override render method
+// sobrescreve o método render
 export {customRender as render}
 ```
 
@@ -235,26 +239,27 @@ export {customRender as render}
   </TabItem>
   </Tabs>
 
-You can then use your custom queries as you would any other query:
+Você pode então usar suas queries customizadas assim como faria em qualquer
+outra query:
 
 ```js
 const {getByDataCy} = render(<Component />)
 
-expect(getByDataCy('my-component')).toHaveTextContent('Hello')
+expect(getByDataCy('meu-component')).toHaveTextContent('Olá')
 ```
 
-### Configuring Jest with Test Utils
+### Configurando Jest com Test Utils
 
-To make your custom test file accessible in your Jest test files without using
-relative imports (`../../test-utils`), add the folder containing the file to the
-Jest `moduleDirectories` option.
+Para tornar seu arquivo de testes customizado acessível nos seus arquivos de
+testes do Jest sem usar relative imports (`../../test-utils`), adicione a pasta
+contendo o arquivo na opção `moduleDirectories` do Jest.
 
-This will make all the `.js` files in the test-utils directory importable
-without `../`.
+Isso vai fazer com que todos os arquivos `.js` no diretório da test-utils sejam
+importáveis sem o `../`.
 
-> **Note**
+> **Nota**
 >
-> This can't be used with Create React App.
+> Isso não pode ser usado com apliações Create React App.
 
 ```diff title="my-component.test.js"
 - import { render, fireEvent } from '../test-utils';
@@ -265,16 +270,16 @@ without `../`.
 module.exports = {
   moduleDirectories: [
     'node_modules',
-+   // add the directory with the test-utils.js file, for example:
-+   'utils', // a utility folder
-+    __dirname, // the root directory
++   // adiciona o diretório com o arquivo test-utils.js, por exemplo:
++   'utils', // uma pasta de utilidade
++    __dirname, // o diretório raiz
   ],
-  // ... other options ...
+  // ... outras opções ...
 }
 ```
 
-If you're using TypeScript, merge this into your `tsconfig.json`. If you're
-using Create React App without TypeScript, save this to `jsconfig.json` instead.
+Se você está usando TypeScript, adicione isso no seu `tsconfig.json`. Se você
+estiver usando Create React App sem TypeScript, salve isso no `jsconfig.json`.
 
 ```diff title="tsconfig.json"
 {
@@ -287,84 +292,85 @@ using Create React App without TypeScript, save this to `jsconfig.json` instead.
 }
 ```
 
-### Jest 24 (or lower) and defaults
+### Jest 24 (ou menor) e padrões
 
-If you're using the Jest testing framework version 24 or lower with the default
-configuration, it's recommended to use `jest-environment-jsdom-fifteen` package
-as Jest uses a version of the jsdom environment that misses some features and
-fixes, required by React Testing Library.
+Se você estiver usando o frameworks de testes Jest na versão 24 ou menor com a
+configuração padrão, é recomendado o uso do pacote
+`jest-environment-jsdom-fifteen` pois o Jest usa uma versão do jsdom environment
+que possui algumas features e fixes, requeridos pela React Testing Library.
 
-First, install `jest-environment-jsdom-fifteen`.
+Primeiro, instale o `jest-environment-jsdom-fifteen`.
 
 ```
 npm install --save-dev jest-environment-jsdom-fifteen
 ```
 
-Then specify `jest-environment-jsdom-fifteen` as the `testEnvironment`:
+Então especifique o `jest-environment-jsdom-fifteen` como `testEnvironment`:
 
 ```diff title="jest.config.js"
  module.exports = {
 +  testEnvironment: 'jest-environment-jsdom-fifteen',
-   // ... other options ...
+   // ... outras opções ...
  }
 ```
 
-## Using without Jest
+## Usando sem o Jest
 
-If you're running your tests in the browser bundled with webpack (or similar)
-then `React Testing Library` should work out of the box for you. However, most
-people using React Testing Library are using it with the Jest testing framework
-with the `testEnvironment` set to `jest-environment-jsdom` (which is the default
-configuration with Jest).
+Se você está rodando seus testes no navegador, com bundle criado pelo webpack
+(ou similar), então a `React Testing Library` deve funcionar out of the box para
+você. No entanto, a maioria das pessoas usando React Testing Library estão
+usando com Jest sendo o framework de testes, portanto o `testEnvironment` é
+setado para `jest-environment-jsdom` (pois é a configuração padrão com o Jest).
 
-`jsdom` is a pure JavaScript implementation of the DOM and browser APIs that
-runs in Node. If you're not using Jest and you would like to run your tests in
-Node, then you must install jsdom yourself. There's also a package called
-`global-jsdom` which can be used to setup the global environment to simulate the
-browser APIs.
+`jsdom` é uma implementação JavaScript pura do DOM e das APIs do navegador que
+rodam no Node. Se você não está usando o Jest e gostaria de rodar seus testes no
+Node, então você deve instalar o jsdom você mesmo. Existe também um pacote
+chamado `global-jsdom`o qual pode ser usado para configurar um ambiente global
+para simular as APIs do navegador.
 
-First, install `jsdom` and `global-jsdom`.
+Primeiro, instale o `jsdom` e o `global-jsdom`.
 
 ```
 npm install --save-dev jsdom global-jsdom
 ```
 
-With mocha, the test command would look something like this:
+Com o mocha, o comando de teste deve parecer com algo assim:
 
 ```
 mocha --require global-jsdom/register
 ```
 
-### Skipping Auto Cleanup
+### Pulando o Cleanup Automático
 
-[`Cleanup`](api.mdx#cleanup) is called after each test automatically by default
-if the testing framework you're using supports the `afterEach` global (like
-mocha, Jest, and Jasmine). However, you may choose to skip the auto cleanup by
-setting the `RTL_SKIP_AUTO_CLEANUP` env variable to 'true'. You can do this with
-[`cross-env`](https://github.com/kentcdodds/cross-env) like so:
+O [`Cleanup`](api.mdx#cleanup) é chamado após cada teste de forma automática por
+padrão se o frameworks de testes que você está usando suporta `afterEach`
+globalmente (como mocha, Jest, e Jasmine). No entanto, você deve escolher pular
+esse auto cleanup ao setar a variável de ambiente `RTL_SKIP_AUTO_CLEANUP` como
+'true'. Você pode fazer isso com o
+[`cross-env`](https://github.com/kentcdodds/cross-env) assim:
 
 ```
 cross-env RTL_SKIP_AUTO_CLEANUP=true jest
 ```
 
-To make this even easier, you can also simply import
-`@testing-library/react/dont-cleanup-after-each` which will do the same thing.
-Just make sure you do this before importing `@testing-library/react`. You could
-do this with Jest's `setupFiles` configuration:
+Para facilitar mais ainda, você pode simplesmente importar
+`@testing-library/react/dont-cleanup-after-each` que vai fazer a mesma coisa. Só
+tenha certeza de fazer isso antes de importar a `@testing-library/react`. Você
+pode fazer isso com a configuração `setupFiles` do Jest:
 
 ```js
 {
-  // ... other jest config
+  // ... outras configurações do Jest
   setupFiles: ['@testing-library/react/dont-cleanup-after-each']
 }
 ```
 
-Or with mocha's `-r` flag:
+Ou com a flag `-r` do mocha:
 
 ```
 mocha -r @testing-library/react/dont-cleanup-after-each
 ```
 
-Alternatively, you could import `@testing-library/react/pure` in all your tests
-that you don't want the `cleanup` to run and the `afterEach` won't be setup
-automatically.
+De forma alternativa, você pode importar `@testing-library/react/pure` em todos
+os seus testes que você não quer o `cleanup` rodando e `afterEach` não será
+configurado automaticamente.
