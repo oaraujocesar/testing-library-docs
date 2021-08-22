@@ -1,30 +1,30 @@
 ---
 id: guiding-principles
-title: Guiding Principles
-sidebar_label: Guiding Principles
+title: Princípios Orientadores
+sidebar_label: Princípios Orientadores
 ---
 
-> [The more your tests resemble the way your software is used, the more
-> confidence they can give you.][guiding-principle]
+> [Quanto mais seus testes se assemelham à forma como o software é usado, mais
+> confiança eles podem lhe dar.][guiding-principle]
 
-We try to only expose methods and utilities that encourage you to write tests
-that closely resemble how your web pages are used.
+Tentamos expor apenas métodos e utilitários que o encorajam a escrever testes
+que se assemelham muito ao modo como suas páginas da web são usadas.
 
-Utilities are included in this project based on the following guiding
-principles:
+As utilidades estão incluídas neste projeto com base nos seguintes princípios
+orientadores:
 
-1.  If it relates to rendering components, then it should deal with DOM nodes
-    rather than component instances, and it should not encourage dealing with
-    component instances.
-2.  It should be generally useful for testing the application components in the
-    way the user would use it. We _are_ making some trade-offs here because
-    we're using a computer and often a simulated browser environment, but in
-    general, utilities should encourage tests that use the components the way
-    they're intended to be used.
-3.  Utility implementations and APIs should be simple and flexible.
+1.  Se estiver relacionado a componentes de renderização, deve lidar com nós do
+    DOM em vez de instâncias de componentes, e não deve lidar com instâncias de
+    componentes.
+2.  Deve ser geralmente útil para testar os componentes da aplicação na forma de
+    como o usuário o usaria. _Estamos_ tendo algumas trocas aqui porque estamos
+    usando um computador e muitas vezes um ambiente de navegador simulado, mas
+    em geral, os utilitários devem encorajar testes que usam os componentes da
+    maneira em que eles são destinados a ser usados.
+3.  As implementações de utilitários e APIs devem ser simples e flexíveis.
 
-At the end of the day, what we want is for this library to be pretty
-light-weight, simple, and understandable.
+No final das contas, o que queremos é que essa biblioteca seja bonita leve,
+simples e compreensível.
 
 <!--
 Links:
